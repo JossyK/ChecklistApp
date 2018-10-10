@@ -5,8 +5,12 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    
+
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    
   </head>
 
   <body>
@@ -33,13 +37,11 @@
 
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>
+    
   <div class="container">
     <div class="row">
-    <%= yield %>
-      
-    </div>
-
-    
+      <%= yield %>
+    </div>  
   </div>
   </body>
 </html>

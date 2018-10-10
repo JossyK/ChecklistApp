@@ -27,7 +27,7 @@ class ItemsController < ApplicationController
 	end
 
 	def update
-		if @item.update(item_params)
+		if @item.update(params.require(:item).permit(:title, :description))
 			redirect_to item_path(@item)
 		else
 			render 'edit'
@@ -36,6 +36,12 @@ class ItemsController < ApplicationController
 
 	def destroy
 		@item.destroy
+		redirect_to root_path
+	end
+
+	def complete
+		@item = Item.find(params[:id])
+		@item.update_attribute(:completed_at, Time.new)
 		redirect_to root_path
 	end
 
