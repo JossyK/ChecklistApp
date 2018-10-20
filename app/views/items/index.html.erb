@@ -1,44 +1,48 @@
-<% if user_signed_in?%>
-<div class="col-md-6 col-md-offset-3">
-<% @item.each do |item| %>
+	<% if user_signed_in?%>
+	<div class="col-md-6 col-md-offset-3">
 
-<% if item.completed? %>
+		<table>
+			
+				<% @item.each do |item| %>
 
-	<div class="row">
-		<div class="col-md-8">
-			<h2 style="opacity: 0.5;" class="item-title"><strike><%= link_to item.title, item %></strike></h2>
-			<p style="opacity: 0.5;" class="item-desc item-sub-title"><%= item.description %></p>
-			<p style="opacity: 0.5;" class="time-ago item-sub-title"> Completed <%= time_ago_in_words(item.completed_at) %> ago</p>
-		</div>
-		<div class="col-md-2">
-			<%= link_to "Mark as Completed", complete_item_path(item), method: :patch, class: "btn btn-success" %>
-		</div>
-		<div class="col-md-2">
-			<%= link_to "Delete", item, method: :delete, data:{confirm: "Are you sure?"}, class: "btn btn-danger"%>
-		</div>
-	</div>
+				<% if item.completed? %>
+		<tr>
+				<td><h2 style="opacity: 0.5;" class="item-title"><strike><%= link_to item.title, item %></strike></h2>
+			 <p style="opacity: 0.5;" class="item-desc item-sub-title"><%= item.description %></p>
+				 <p style="opacity: 0.5;" class="time-ago item-sub-title"> Completed <%= time_ago_in_words(item.completed_at) %> ago</p></td>
+
+
+				<td>	<%= link_to "Mark as Completed", complete_item_path(item), method: :patch, class: "btn btn-success" %></td>
+
+
+					<td><%= link_to "Delete", item, method: :delete, data:{confirm: "Are you sure?"}, class: "btn btn-danger"%></td>
+
+				</tr>
+
+				<% else %>
+		<tr>
+				<!-- <div class="row "> -->
+					<!-- <div class="col-md-8"> -->
+					<td><h2 class="item-title"><%= link_to item.title, item %></h2> 
+						<p class="item-title"><%= item.description %></p>
+						<p class="time-ago item-sub-title"> Created<%=  time_ago_in_words(item.created_at) %> ago</p></td>
+					<!-- </div> -->
+					<!-- <div class="col-md-2"> -->
+					<td>	<%= link_to "Mark as Completed", complete_item_path(item), method: :patch, class: "btn btn-success"%></td>
+					<!-- </div> -->
+					<!-- <div class="col-md-2"> -->
+					<td>	<%= link_to "Delete", item, method: :delete, data:{confirm: "Are you sure?"}, class: "btn btn-danger" %> </td>
+					<!-- </div> -->
+				<!-- </div> -->
+				<% end %>
+				<% end %>
+			</tr>
+
+			</table>
+		<!-- </div> -->
+
+	<!-- </div> -->
 
 	<% else %>
-
-	<div class="row ">
-		<div class="col-md-8">
-			<h2 class="item-title"><%= link_to item.title, item %></h2>
-			<p class="item-title"><%= item.description %></p>
-			<p class="time-ago item-sub-title"> Created<%=  time_ago_in_words(item.created_at) %> ago</p>
-		</div>
-		<div class="col-md-2">
-			<%= link_to "Mark as Completed", complete_item_path(item), method: :patch, class: "btn btn-success"%>
-		</div>
-		<div class="col-md-2">
-		<%= link_to "Delete", item, method: :delete, data:{confirm: "Are you sure?"}, class: "btn btn-danger" %>
-		</div>
-	</div>
-		<% end %>
-		<% end %>
-</div>
-
-</div>
-
-<% else %>
 	<%= render 'layouts/static_page' %>
-<% end %>
+	<% end %>
